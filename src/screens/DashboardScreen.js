@@ -1,20 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View} from 'react-native';
+import { Text } from 'react-native-paper';
+import { useTheme } from '../context/ThemeContext';
 
 const DashboardScreen = () => {
+  const { theme, toggleTheme } = useTheme(); // Acessa o theme e o toggleTheme do contexto
+
   return (
-    <View style={styles.container}>
-      <Text>Dashboard Screen</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.background }}>
+      <Text style={{ color: theme.text }}>Dashboard Screen</Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default DashboardScreen;

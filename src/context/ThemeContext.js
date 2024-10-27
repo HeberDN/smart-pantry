@@ -1,19 +1,26 @@
 import React, { createContext, useContext, useState } from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
 import themes from '../themes/theme';
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light');
-
+  const [themeName, setThemeName] = useState('light');
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setThemeName(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  const theme = {
+    ...themes[themeName],
+    // Adicione mais propriedades se necessário para o Paper
   };
 
   return (
-    <ThemeContext.Provider value={{ theme: themes[theme], toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <PaperProvider theme={theme}>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        {children}
+      </ThemeContext.Provider>
+    </PaperProvider>
   );
 };
 
