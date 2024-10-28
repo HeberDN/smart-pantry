@@ -10,6 +10,7 @@ import ProductsScreen from '../screens/ProductsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import Foundation from '@expo/vector-icons/Foundation';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import CircleButton from '../components/CircleButton';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,6 +25,10 @@ const AppNavigator = () => {
             let iconName;
             let IconComponent;
 
+            if(route.name === 'Nova Entrada'){
+              return <CircleButton focused={focused}/>;
+            }
+
             switch (route.name) {
               case 'Home':
                 iconName = 'home';
@@ -31,10 +36,6 @@ const AppNavigator = () => {
                 break;
               case 'Dashboard':
                 iconName = 'graph-trend';
-                IconComponent = Foundation;
-                break;
-              case 'Nova Entrada':
-                iconName = 'plus';
                 IconComponent = Foundation;
                 break;
               case 'Produtos':
@@ -62,7 +63,7 @@ const AppNavigator = () => {
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Dashboard" component={DashboardScreen} />
-        <Tab.Screen name="Nova Entrada" component={NewEntryScreen} />
+        <Tab.Screen name="Nova Entrada" component={NewEntryScreen} options={{ tabBarLabel: '' }}/>
         <Tab.Screen name="Produtos" component={ProductsScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
